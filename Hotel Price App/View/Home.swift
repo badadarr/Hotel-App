@@ -10,6 +10,20 @@ import SwiftUI
 struct Home: View {
     var animation: Namespace.ID
     var white = Color.white.opacity(0.85)
+    
+    func Header(title: String) -> HStack<TupleView<(Text, Spacer)>> {
+        return // karena keduanya sama jadi akan membuatnya dapat digunakan kembali..
+            HStack {
+                
+                Text(title)
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .foregroundColor(white)
+                
+                Spacer()
+            }
+    }
+    
     var body: some View {
         
         VStack {
@@ -46,14 +60,7 @@ struct Home: View {
                 
                 VStack {
                     
-                    HStack {
-                        Text("Recommended")
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
-                            .foregroundColor(white)
-                        
-                        Spacer()
-                    }
+                    Header(title: "Recommended")
                     .padding()
                     
                     HStack {
@@ -84,13 +91,20 @@ struct Home: View {
                         Spacer(minLength: 5)
                         
                         Image("p2").resizable()
+                            .frame(width: 190, height: 140)
+                            .cornerRadius(20)
                         
                     }
                     .padding([.vertical, .leading])
                     .background (
                         LinearGradient(gradient: .init(colors: [Color("g1"), Color("g2")]), startPoint: .top, endPoint: .bottom)
                             .cornerRadius(25)
+                            .padding(.vertical, 25)
+                            .padding(.trailing, 30)
                     )
+                    .padding(.horizontal)
+                    
+                    Header(title: "Popular Places")
                     .padding()
                 }
             }
