@@ -8,8 +8,15 @@
 import SwiftUI
 
 struct TabBar: View {
-    @State var currentTab = "house"
+    @State var currentTab = "home"
     @Namespace var animation
+    init() {
+        
+        // hiding default tab bar...
+        UITabBar.appearance().isHidden = true
+    }
+    // safe area values...
+    @State var safeArea = UIApplication.shared.windows.first?.safeAreaInsets
     var body: some View {
         
         ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
@@ -39,17 +46,20 @@ struct TabBar: View {
             
             // Custom Tab Bar...
             
-            HStack(spacing: 0) {
+            HStack(spacing: 35) {
                 
                 ForEach(tabs,id: \.self) { image in
                     
                     TabButton(image: image, selected: $currentTab, animation: animation)
-                    
-                    if image != tabs.last{Spacer(minLength: 0)}
+
                     
                 }
             }
+            .padding(.horizontal, 35)
+            .padding(.top)
+            .padding(.bottom, safeArea?.bottom == 0 ? safeArea?.bottom : 15)
         }
+        .ignoresSafeArea(.all, edges: .bottom)
     }
 }
-var tabs = ["house", "book", "suit.heart", "person"]
+var tabs = ["home", "book", "suit.heart", "person"]
