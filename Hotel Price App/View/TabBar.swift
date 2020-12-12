@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TabBar: View {
-    @State var currentTab = "home"
+    @State var currentTab = "house"
     @Namespace var animation
     init() {
         
@@ -23,7 +23,7 @@ struct TabBar: View {
             
             TabView(selection: $currentTab) {
                 
-                Text("Home")
+                Home(animation: animation)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .tag(tabs[0])
                     .background(Color("bg").ignoresSafeArea())
@@ -58,8 +58,12 @@ struct TabBar: View {
             .padding(.horizontal, 35)
             .padding(.top)
             .padding(.bottom, safeArea?.bottom == 0 ? safeArea?.bottom : 15)
+            .background(
+                LinearGradient(gradient: .init(colors: [Color("g1"), Color("g2")]), startPoint: .top, endPoint: .bottom)
+                    .clipShape(CustomCorner(corners: [.topLeft, .topRight]))
+            )
         }
         .ignoresSafeArea(.all, edges: .bottom)
     }
 }
-var tabs = ["home", "book", "suit.heart", "person"]
+var tabs = ["house", "book", "suit.heart", "person"]
