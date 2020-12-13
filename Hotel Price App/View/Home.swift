@@ -38,6 +38,7 @@ struct Home: View {
                             .font(.title2)
                             .foregroundColor(white)
                     }
+                    
                     Spacer()
                     
                     Button(action: {}) {
@@ -106,7 +107,58 @@ struct Home: View {
                     
                     Header(title: "Popular Places")
                     .padding()
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        
+                        HStack(spacing: 25) {
+                            
+                            ForEach(items) { item in
+                                // Card View...
+                                
+                                CardView(item: item)
+                            }
+                        }
+                        .padding()
+                        .padding(.horizontal, 4)
+                    }
+                    
+                    Header(title: "Any Visitors")
+                    .padding()
+                    
+                    HStack {
+                        
+                        Image("p4").resizable()
+                            .frame(width: 190, height: 140)
+                            .cornerRadius(20)
+                            .aspectRatio(contentMode: .fit)
+                            .padding(.trailing)
+                        
+                        
+                        VStack(alignment: .leading, spacing: 6) {
+                            
+                            Text("Hoxton Hotel")
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                            
+                            Text("@Awesome Price")
+                                .foregroundColor(white)
+                            
+                            Text("$200,23")
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                        }
+                        Spacer(minLength: 5)
+                    }
+                    .padding([.vertical, .trailing])
+                    .background (
+                        LinearGradient(gradient: .init(colors: [Color("g1"), Color("g2")]), startPoint: .top, endPoint: .bottom)
+                            .cornerRadius(25)
+                            .padding(.vertical, 25)
+                            .padding(.leading, 30)
+                    )
+                    .padding(.horizontal)
                 }
+                .padding(.bottom, 100)
             }
         }
     }
